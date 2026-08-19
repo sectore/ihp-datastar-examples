@@ -18,7 +18,7 @@ rocketCellId row col = "px-" <> tshow row <> "-" <> tshow col
 pixelCellClass :: Text
 pixelCellClass = "size-4 sm:size-6 transition-colors duration-50"
 
--- | Whole grid, every cell unlit. Also reused by 'Web.Controller.Rocket' to
+-- | Whole grid, every cell blank. Also reused by 'Web.Controller.Rocket' to
 -- reset the grid before each run. Column/row sizes must match 'pixelCellClass'.
 rocketGridHtml :: Html
 rocketGridHtml = [hsx|

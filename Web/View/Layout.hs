@@ -10,8 +10,6 @@ import Application.Helper.View
 import IHP.Controller.Cookie (getCookie, setCookie)
 
 
--- | Don't add Turbolinks back: it raced Tailwind's CDN script and broke
--- dark-mode timing.
 defaultLayout :: Html -> Html
 defaultLayout inner = [hsx|
 <!DOCTYPE html>

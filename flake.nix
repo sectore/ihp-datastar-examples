@@ -27,8 +27,9 @@
                         # Native dependencies, e.g. imagemagick
                     ];
                     haskellPackages = p: let
-                        # callHackage would fail: both packages postdate nixpkgs' bundled
-                        # all-cabal-hashes snapshot, so only callHackageDirect can find them.
+                        # Datastar SDK (https://data-star.dev/), from Hackage.
+                        # Note: `callHackage` would fail: both packages postdate nixpkgs' bundled
+                        # all-cabal-hashes snapshot, so only `callHackageDirect` can find them.
                         datastarHsUnpatched = p.callHackageDirect {
                           pkg = "datastar-hs";
                           ver = "1.1.0.1";
@@ -60,7 +61,7 @@
                         # ihp-typed-sql      # Type-safe SQL queries
                         # ihp-pglistener     # PostgreSQL LISTEN/NOTIFY
 
-                        # Datastar SDK (https://data-star.dev/), from Hackage.
+                        # We use zlib compressor -> `datastar-hs-zlib`
                         datastarHsPatched
                         (p.callHackageDirect {
                           pkg = "datastar-hs-zlib";

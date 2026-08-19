@@ -3,8 +3,7 @@ import IHP.RouterPrelude
 import Generated.Types
 import Web.Types
 
--- The welcome page at '/' is served by the static controller below.
--- Additional [routes|...|] blocks get appended by `new-controller`.
+-- Custom route: '/' has no natural AutoRoute path, so it's mapped explicitly here.
 [routes|StaticController
 GET /    WelcomeAction
 |]
