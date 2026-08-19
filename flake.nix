@@ -26,7 +26,30 @@
                     packages = with pkgs; [
                         # Native dependencies, e.g. imagemagick
                     ];
-                    haskellPackages = p: with p; [
+                    haskellPackages = p: let
+                        # Datastar SDK (https://data-star.dev/), from Hackage.
+                        # Note: `callHackage` would fail: both packages postdate nixpkgs' bundled
+                        # all-cabal-hashes snapshot, so only `callHackageDirect` can find them.
+                        datastarHsUnpatched = p.callHackageDirect {
+                          pkg = "datastar-hs";
+                          ver = "1.1.0.1";
+                          sha256 = "sha256-PRO/xhyM4UuqI190ahgVg0skyure/YjWY6JrnxypyUw=";
+                        } {};
+
+                        # datastar-hs's WAI.hs uses `WAI.hAcceptEncoding`, which needs http-types
+                        # >=0.12.5 to re-export it from the top-level module; this project's
+                        # nixpkgs pin (followed from IHP's flake.lock) ships 0.12.4. Patch in one
+                        # import line instead of bumping http-types project-wide - GHC allows
+                        # multiple modules under one qualified alias, and the file already does
+                        # this for WAI/Wai.
+                        datastarHsPatched = pkgs.haskell.lib.overrideCabal datastarHsUnpatched (old: {
+                            postPatch = (old.postPatch or "") + ''
+                                substituteInPlace src/Hypermedia/Datastar/WAI.hs \
+                                    --replace-fail 'import Network.HTTP.Types qualified as WAI' \
+                                    $'import Network.HTTP.Types qualified as WAI\nimport Network.HTTP.Types.Header qualified as WAI (hAcceptEncoding)'
+                            '';
+                        });
+                    in with p; [
                         # Haskell dependencies go here
                         p.ihp
                         base
@@ -37,6 +60,14 @@
                         # ihp-job-dashboard  # Job dashboard UI
                         # ihp-typed-sql      # Type-safe SQL queries
                         # ihp-pglistener     # PostgreSQL LISTEN/NOTIFY
+
+                        # We use zlib compressor -> `datastar-hs-zlib`
+                        datastarHsPatched
+                        (p.callHackageDirect {
+                          pkg = "datastar-hs-zlib";
+                          ver = "1.0.0.0";
+                          sha256 = "1kmij7dp55j1f705wdfqhzbcdkib6rl0l40fj5ip2bnvqiyixixx";
+                        } { datastar-hs = datastarHsPatched; })
                     ];
                     devHaskellPackages = p: with p; [
                         cabal-install
