@@ -38,7 +38,7 @@ defaultLayout inner = [hsx|
         pageHeader = [hsx|
             <div>
                 <div class="flex items-center justify-between p-4">
-                    <div>{when (not isHome) backLink}</div>
+                    <div>{when (not isHome) breadcrumbHtml}</div>
                     {themeToggleButtonHtml}
                 </div>
                 <div class="flex flex-col items-center justify-center pb-12">
@@ -61,10 +61,27 @@ defaultLayout inner = [hsx|
             </div>
         |]
 
-        backLink :: Html
-        backLink = [hsx|
-            <a href={WelcomeAction} class="text-sm text-gray-600 dark:text-gray-300 hover:underline">Home</a>
+        -- breadcrumb, only rendered for sub pages
+        breadcrumbHtml :: Html
+        breadcrumbHtml = [hsx|
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <ol>
+                    <li><a href={WelcomeAction}>Home</a></li>
+                    {currentPageCrumb}
+                </ol>
+            </nav>
         |]
+          where
+            currentPageCrumb :: Html
+            currentPageCrumb = [hsx|
+                <li aria-hidden="true">{iconArrowRight}</li>
+                <li><span aria-current="page">{currentPageLabel}</span></li>
+            |]
+
+            currentPageLabel :: Text
+            currentPageLabel = case pathInfo ?request of
+                (segment : _) -> segment
+                [] -> "Home"
 
 -- | Shared with 'Web.Controller.Theme.ToggleThemeAction's sendPatchElements
 -- (same "theme-toggle" id).
