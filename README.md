@@ -1,6 +1,18 @@
-# IHP + Datastar
+# IHP + Datastar examples
 
-PoC to discover [IHP](https://ihp.digitallyinduced.com/Guide/) and [Datastar](https://data-star.dev/). _Still WIP ..._
+ _Still WIP..._
+ 
+PoC to discover [IHP](https://ihp.digitallyinduced.com/Guide/) and [Datastar](https://data-star.dev/).
+
+# Examples
+
+## Rocket
+
+![Rocket example](./data/rocket.gif)
+
+## Typewriter
+
+![Typewriter example](./data/typewriter.gif)
 
 # Installation
 
