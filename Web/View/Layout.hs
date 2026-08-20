@@ -41,8 +41,14 @@ defaultLayout inner = [hsx|
                     <div>{when (not isHome) backLink}</div>
                     {themeToggleButtonHtml}
                 </div>
-                <div class="text-center pb-12">
-                    <a href="https://data-star.dev/"><img src="https://data-star.dev/static/images/rocket-64x64.png" alt="Datastar" width="64" height="64" class="mx-auto mb-4"/></a>
+                <div class="flex flex-col items-center justify-center pb-12">
+                    <a href="https://data-star.dev/" class="inline mb-4">
+                        <img
+                            src={assetPath "/datastar-logo.png"}
+                            alt="Datastar"
+                            class="size-16"
+                        />
+                    </a>
                     <div class="text-2xl">
                         <a type="button" class="btn text-2xl" data-variant="ghost" data-size="sm" href="https://ihp.digitallyinduced.com/">
                             IHP
