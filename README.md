@@ -6,15 +6,15 @@ PoC to discover [IHP](https://ihp.digitallyinduced.com/Guide/) and [Datastar](ht
 
 # Examples
 
-## Rocket
-
-![Rocket example](./data/rocket.gif)
-
 ## Todos (synced)
 
 ![Todos example](./data/todomvc.gif)
 
-## Typewriter
+## Rocket (animated)
+
+![Rocket example](./data/rocket.gif)
+
+## Typewriter (streamed)
 
 ![Typewriter example](./data/typewriter.gif)
 
