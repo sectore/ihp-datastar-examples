@@ -8,12 +8,14 @@ import Web.View.Layout (defaultLayout)
 import Web.Controller.Static
 import Web.Controller.Typewriter
 import Web.Controller.Rocket
+import Web.Controller.Todo
 
 instance FrontController WebApplication where
     controllers =
         [ startPage WelcomeAction
         , parseRoute @TypewriterController
         , parseRoute @RocketController
+        , parseRoute @TodoController
         -- Generator Marker
         ]
 

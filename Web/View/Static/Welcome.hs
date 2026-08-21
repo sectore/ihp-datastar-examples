@@ -18,5 +18,11 @@ instance View WelcomeView where
                 </section>
                 <aside>{iconArrowRight}</aside>
             </a>
+            <a href={TodosAction} class="item">
+                <section>
+                <h3>Todos</h3>
+                </section>
+                <aside>{iconArrowRight}</aside>
+            </a>
         </div>
     |]

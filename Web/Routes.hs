@@ -10,3 +10,4 @@ GET /    WelcomeAction
 
 instance AutoRoute TypewriterController
 instance AutoRoute RocketController
+instance AutoRoute TodoController
