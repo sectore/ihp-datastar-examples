@@ -18,3 +18,12 @@ data RocketController
     = RocketAction
     | RocketRunAction
     deriving (Eq, Show, Data)
+
+data TodoController
+    = TodosAction
+    | TodosUpdatesAction
+    | CreateTodoAction
+    | ToggleTodoAction { todoId :: !(Id Todo) }
+    | UpdateTodoAction { todoId :: !(Id Todo) }
+    | DeleteTodoAction { todoId :: !(Id Todo) }
+    deriving (Eq, Show, Data)
